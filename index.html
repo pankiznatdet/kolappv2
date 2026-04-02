@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Kolesterol Rehberi</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;color:#1e293b;overscroll-behavior:none;overflow-x:hidden}
+#app{max-width:480px;margin:0 auto;min-height:100vh;background:#fafbfc;position:relative;padding-bottom:76px}
+.page{display:none;animation:fi .25s ease}
+.page.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes su{from{transform:translateY(100%)}to{transform:translateY(0)}}
+::-webkit-scrollbar{display:none}
+
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;padding:6px 0 env(safe-area-inset-bottom,8px);z-index:50}
+.nb{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:6px 4px;color:#94a3b8;font-family:inherit;font-size:10px;font-weight:500;min-width:56px}
+.nb.on{color:#16a34a;font-weight:700}
+.nb i{font-style:normal;font-size:22px;line-height:1}
+
+.ph{padding:20px 20px 12px;display:flex;align-items:center;gap:10px}
+.bb{background:#f1f5f9;border:none;border-radius:12px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#64748b}
+.pt{font-size:20px;font-weight:700;color:#1e293b}
+
+.sw{padding:0 20px;margin-bottom:12px}
+.sb{display:flex;align-items:center;gap:10px;background:#f1f5f9;border-radius:14px;padding:0 14px}
+.sb input{flex:1;border:none;background:none;padding:12px 0;font-size:14px;color:#1e293b;outline:none;font-family:inherit}
+.cb{background:none;border:none;cursor:pointer;color:#94a3b8;font-size:16px;padding:4px;display:none}
+.cb.v{display:block}
+
+.pills{display:flex;gap:6px;overflow-x:auto;padding:0 20px 12px;-webkit-overflow-scrolling:touch}
+.pill{padding:7px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:600;white-space:nowrap;background:#f1f5f9;color:#64748b;font-family:inherit}
+.pill.on{background:#1e293b;color:#fff}
+
+.fl{padding:0 20px;display:flex;flex-direction:column;gap:8px}
+.fc{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:14px 16px;cursor:pointer;text-align:left;width:100%;display:flex;align-items:center;gap:14px;font-family:inherit}
+.fc:active{border-color:#86efac}
+.fcc{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.fcc small{font-size:8px;margin-left:1px}
+.fci{flex:1;min-width:0}
+.fcn{font-weight:600;font-size:14.5px;color:#1e293b}
+.fcm{font-size:11.5px;color:#94a3b8;margin-top:2px}
+.fcb{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.nr{text-align:center;padding:32px;color:#94a3b8;font-size:14px}
+
+.mo{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center}
+.mo.open{display:flex}
+.moo{position:absolute;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.mos{position:relative;width:100%;max-width:480px;max-height:88vh;background:#fff;border-radius:24px 24px 0 0;padding:20px 20px 32px;overflow-y:auto;animation:su .3s ease}
+.moh{width:40px;height:4px;border-radius:2px;background:#e2e8f0;margin:0 auto 16px}
+.mohe{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.mon{font-size:22px;font-weight:700;color:#1e293b}
+.moca{font-size:13px;color:#94a3b8}
+.ng{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:20px}
+.ni{background:#f8fafc;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px}
+.nii{font-size:18px}
+.niv{font-size:15px;font-weight:700;color:#1e293b}
+.niu{font-size:10px;font-weight:400;color:#94a3b8}
+.nil{font-size:10.5px;color:#94a3b8}
+.ckb{background:#f0fdf4;border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.ckt{font-size:11px;font-weight:700;color:#16a34a;margin-bottom:4px;letter-spacing:.5px}
+.wb{background:#fef2f2;border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.wt{font-size:11px;font-weight:700;color:#dc2626;margin-bottom:4px;letter-spacing:.5px}
+.mcl{margin-top:16px;width:100%;padding:14px;border-radius:14px;border:none;background:#f1f5f9;color:#64748b;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit}
+
+.hh{text-align:center;padding:32px 0 24px}
+.he{font-size:52px;margin-bottom:8px}
+.ht{font-size:28px;font-weight:800;color:#1e293b;line-height:1.2}
+.hs{margin-top:8px;font-size:14px;color:#94a3b8}
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px;margin-bottom:16px}
+.hc{border:none;border-radius:18px;padding:20px 16px;cursor:pointer;text-align:left;font-family:inherit}
+.hc:active{transform:scale(.97)}
+.hci{font-size:32px;margin-bottom:8px}
+.hctt{font-size:14px;font-weight:700;line-height:1.2}
+.hcd{font-size:11px;color:#94a3b8;margin-top:4px}
+.tb{background:linear-gradient(135deg,#065f46,#047857);border-radius:18px;padding:20px;color:#fff;margin:0 20px 16px}
+.tbl{font-size:13px;font-weight:700;letter-spacing:.5px;opacity:.8;margin-bottom:6px}
+.tbt{font-size:14px;line-height:1.6}
+.tl{background:#f8fafc;border-radius:18px;padding:18px 20px;margin:0 20px}
+.tlh{font-size:13px;font-weight:700;color:#64748b;margin-bottom:10px}
+.tr{display:flex;gap:10px;padding:8px 0;font-size:13px;color:#475569}
+.tr+.tr{border-top:1px solid #e2e8f0}
+.tc{color:#16a34a;font-weight:700}
+
+.gb{width:100%;padding:16px;border-radius:16px;border:none;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#8b5cf6);color:#fff;font-size:15px;font-weight:700;font-family:inherit;box-shadow:0 4px 14px rgba(124,58,237,.3);margin-bottom:20px}
+.gb:active{transform:scale(.98)}
+.mt{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.mcd{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px}
+.mch{display:flex;justify-content:space-between;margin-bottom:8px}
+.mct{font-size:12px;font-weight:700;color:#64748b;letter-spacing:.5px}
+.mcti{font-size:11px;color:#94a3b8}
+.mctt{font-size:15px;font-weight:700;color:#1e293b;margin-bottom:4px}
+.mcde{font-size:12.5px;color:#64748b;line-height:1.4;margin-bottom:8px}
+.mccal{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;color:#1e293b}
+.rb{width:100%;padding:14px;border-radius:14px;border:2px dashed #c4b5fd;background:#f5f3ff;color:#7c3aed;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.em{text-align:center;padding:40px 20px;color:#94a3b8}
+.emi{font-size:48px;margin-bottom:12px}
+
+.tw{padding:0 20px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;min-width:520px;border-collapse:separate;border-spacing:0;font-size:12px}
+thead th{padding:10px 8px;text-align:right;font-weight:700;color:#94a3b8;border-bottom:2px solid #e2e8f0;cursor:pointer;white-space:nowrap;font-size:11px;background:#f8fafc;user-select:none;position:sticky;top:0;z-index:2}
+thead th:first-child{text-align:left;padding-left:12px;left:0;z-index:3}
+thead th.sa{color:#1e293b}
+tbody td{padding:10px 8px;text-align:right;border-bottom:1px solid #f1f5f9;font-variant-numeric:tabular-nums;color:#475569}
+tbody td:first-child{text-align:left;padding-left:12px;font-weight:600;color:#1e293b;position:sticky;left:0;z-index:1;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tbody tr:nth-child(even) td{background:#fafbfc}
+tbody tr:nth-child(odd) td{background:#fff}
+tbody td.ch{color:#dc2626}
+tbody td.sa{font-weight:700}
+.dt{display:inline-block;width:8px;height:8px;border-radius:4px;margin-right:6px}
+.wbn{background:#fef2f2;border-radius:14px;padding:12px 16px;font-size:13px;color:#991b1b;line-height:1.5;margin:0 20px 12px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+var D=document,Q=function(s,p){return(p||D).querySelectorAll(s)},E=function(t,c,s){return Object.assign(D.createElement(t),c||{},s?{style:Object.entries(s).map(function(e){return e[0]+':'+e[1]}).join(';')}:{})};
+
+var FOODS=[
+{id:1,n:"Brokoli",c:"Sebze",ch:0,ca:34,fi:2.6,pr:2.8,fa:0.4,vc:89,va:31,po:316,ir:0.7,om:0,ck:"Buharda 5-7dk pişirin.",r:"great",av:0},
+{id:2,n:"Ispanak",c:"Sebze",ch:0,ca:23,fi:2.2,pr:2.9,fa:0.4,vc:28,va:469,po:558,ir:2.7,om:0,ck:"Çiğ salata veya hafif soteleyin.",r:"great",av:0},
+{id:3,n:"Havuç",c:"Sebze",ch:0,ca:41,fi:2.8,pr:0.9,fa:0.2,vc:6,va:835,po:320,ir:0.3,om:0,ck:"Çiğ veya fırında.",r:"great",av:0},
+{id:4,n:"Domates",c:"Sebze",ch:0,ca:18,fi:1.2,pr:0.9,fa:0.2,vc:14,va:42,po:237,ir:0.3,om:0,ck:"Likopen pişince artar.",r:"great",av:0},
+{id:5,n:"Kabak",c:"Sebze",ch:0,ca:17,fi:1,pr:1.2,fa:0.3,vc:17,va:10,po:261,ir:0.4,om:0,ck:"Izgara veya fırında.",r:"great",av:0},
+{id:6,n:"Patlıcan",c:"Sebze",ch:0,ca:25,fi:3,pr:1,fa:0.2,vc:2,va:1,po:229,ir:0.2,om:0,ck:"Fırında veya ızgara.",r:"great",av:0},
+{id:7,n:"Karnabahar",c:"Sebze",ch:0,ca:25,fi:2,pr:1.9,fa:0.3,vc:48,va:0,po:299,ir:0.4,om:0,ck:"Buharda veya fırında.",r:"great",av:0},
+{id:8,n:"Kereviz",c:"Sebze",ch:0,ca:42,fi:1.8,pr:1.5,fa:0.3,vc:8,va:0,po:300,ir:0.7,om:0,ck:"Çorba veya salatalarda.",r:"great",av:0},
+{id:9,n:"Sarımsak",c:"Sebze",ch:0,ca:149,fi:2.1,pr:6.4,fa:0.5,vc:31,va:0,po:401,ir:1.7,om:0,ck:"Kolesterol düşürücü.",r:"great",av:0},
+{id:10,n:"Soğan",c:"Sebze",ch:0,ca:40,fi:1.7,pr:1.1,fa:0.1,vc:7,va:0,po:146,ir:0.2,om:0,ck:"Her yemekte kullanılabilir.",r:"great",av:0},
+{id:11,n:"Biber",c:"Sebze",ch:0,ca:20,fi:1.7,pr:0.9,fa:0.2,vc:80,va:18,po:175,ir:0.3,om:0,ck:"Çiğ salata veya ızgarada.",r:"great",av:0},
+{id:12,n:"Enginar",c:"Sebze",ch:0,ca:47,fi:5.4,pr:3.3,fa:0.2,vc:12,va:0,po:370,ir:1.3,om:0,ck:"Zeytinyağlı veya buharda.",r:"great",av:0},
+{id:13,n:"Elma",c:"Meyve",ch:0,ca:52,fi:2.4,pr:0.3,fa:0.2,vc:5,va:3,po:107,ir:0.1,om:0,ck:"Kabuğuyla tüketin.",r:"great",av:0},
+{id:14,n:"Avokado",c:"Meyve",ch:0,ca:160,fi:6.7,pr:2,fa:15,vc:10,va:7,po:485,ir:0.6,om:0.1,ck:"Çiğ tüketin.",r:"great",av:0},
+{id:15,n:"Portakal",c:"Meyve",ch:0,ca:47,fi:2.4,pr:0.9,fa:0.1,vc:53,va:11,po:181,ir:0.1,om:0,ck:"Taze sıkılmış suyu.",r:"great",av:0},
+{id:16,n:"Muz",c:"Meyve",ch:0,ca:89,fi:2.6,pr:1.1,fa:0.3,vc:9,va:3,po:358,ir:0.3,om:0,ck:"Atıştırmalık veya smoothie.",r:"good",av:0},
+{id:17,n:"Çilek",c:"Meyve",ch:0,ca:32,fi:2,pr:0.7,fa:0.3,vc:59,va:1,po:153,ir:0.4,om:0.1,ck:"Antioksidan deposu.",r:"great",av:0},
+{id:18,n:"Yaban Mersini",c:"Meyve",ch:0,ca:57,fi:2.4,pr:0.7,fa:0.3,vc:10,va:3,po:77,ir:0.3,om:0,ck:"Kahvaltıda yulafla.",r:"great",av:0},
+{id:19,n:"Nar",c:"Meyve",ch:0,ca:83,fi:4,pr:1.7,fa:1.2,vc:10,va:0,po:236,ir:0.3,om:0,ck:"Antioksidan şampiyonu.",r:"great",av:0},
+{id:20,n:"Üzüm",c:"Meyve",ch:0,ca:69,fi:0.9,pr:0.7,fa:0.2,vc:11,va:3,po:191,ir:0.4,om:0,ck:"Koyu renkli tercih edin.",r:"good",av:0},
+{id:21,n:"Yulaf Ezmesi",c:"Tahıl",ch:0,ca:389,fi:10.6,pr:16.9,fa:6.9,vc:0,va:0,po:429,ir:4.7,om:0.1,ck:"Beta-glukan kolesterolü düşürür.",r:"great",av:0},
+{id:22,n:"Mercimek",c:"Baklagil",ch:0,ca:116,fi:7.9,pr:9,fa:0.4,vc:2,va:0,po:369,ir:3.3,om:0,ck:"Çözünür lif kaynağı.",r:"great",av:0},
+{id:23,n:"Nohut",c:"Baklagil",ch:0,ca:164,fi:7.6,pr:8.9,fa:2.6,vc:1,va:1,po:291,ir:2.9,om:0,ck:"Haşlama veya fırında.",r:"great",av:0},
+{id:24,n:"Kuru Fasulye",c:"Baklagil",ch:0,ca:127,fi:6.4,pr:8.7,fa:0.5,vc:0,va:0,po:403,ir:2.2,om:0,ck:"Zeytinyağlı yahni.",r:"great",av:0},
+{id:25,n:"Bulgur",c:"Tahıl",ch:0,ca:342,fi:12.5,pr:12.3,fa:1.3,vc:0,va:0,po:410,ir:2.5,om:0,ck:"Pilav yerine tercih edin.",r:"great",av:0},
+{id:26,n:"Kinoa",c:"Tahıl",ch:0,ca:120,fi:2.8,pr:4.4,fa:1.9,vc:0,va:0,po:172,ir:1.5,om:0.1,ck:"Salata veya pilav alternatifi.",r:"great",av:0},
+{id:27,n:"Tam Buğday Ekmeği",c:"Tahıl",ch:0,ca:247,fi:6.8,pr:13,fa:3.4,vc:0,va:0,po:254,ir:2.5,om:0,ck:"Beyaz ekmek yerine.",r:"good",av:0},
+{id:28,n:"Esmer Pirinç",c:"Tahıl",ch:0,ca:111,fi:1.8,pr:2.6,fa:0.9,vc:0,va:0,po:43,ir:0.4,om:0,ck:"Beyaz pirinç yerine.",r:"good",av:0},
+{id:29,n:"Somon",c:"Balık",ch:55,ca:208,fi:0,pr:20,fa:13,vc:0,va:12,po:363,ir:0.3,om:2.3,ck:"Omega-3 şampiyonu.",r:"great",av:0},
+{id:30,n:"Sardalya",c:"Balık",ch:65,ca:208,fi:0,pr:25,fa:11,vc:0,va:6,po:397,ir:2.9,om:1.5,ck:"Izgara veya fırında.",r:"great",av:0},
+{id:31,n:"Uskumru",c:"Balık",ch:70,ca:205,fi:0,pr:19,fa:14,vc:0,va:5,po:314,ir:1.6,om:2.7,ck:"Izgara veya fırında.",r:"great",av:0},
+{id:32,n:"Hamsi",c:"Balık",ch:60,ca:131,fi:0,pr:20,fa:5,vc:0,va:4,po:383,ir:3.3,om:1.5,ck:"Buğulama veya fırında.",r:"great",av:0},
+{id:33,n:"Levrek",c:"Balık",ch:53,ca:97,fi:0,pr:18,fa:2,vc:0,va:3,po:256,ir:0.3,om:0.6,ck:"Izgara veya buğulama.",r:"good",av:0},
+{id:34,n:"Alabalık",c:"Balık",ch:58,ca:148,fi:0,pr:21,fa:6.6,vc:0,va:5,po:361,ir:0.3,om:1,ck:"Fırında veya ızgarada.",r:"great",av:0},
+{id:35,n:"Ton Balığı",c:"Balık",ch:45,ca:130,fi:0,pr:29,fa:1,vc:0,va:6,po:237,ir:1,om:0.3,ck:"Konserve su bazlı tercih.",r:"good",av:0},
+{id:36,n:"Tavuk Göğsü",c:"Beyaz Et",ch:64,ca:165,fi:0,pr:31,fa:3.6,vc:0,va:1,po:256,ir:0.4,om:0,ck:"Deriyi çıkarın.",r:"good",av:0},
+{id:37,n:"Hindi Göğsü",c:"Beyaz Et",ch:62,ca:135,fi:0,pr:30,fa:1,vc:0,va:0,po:293,ir:0.5,om:0,ck:"Fırında veya ızgara.",r:"good",av:0},
+{id:38,n:"Ceviz",c:"Kuruyemiş",ch:0,ca:654,fi:6.7,pr:15,fa:65,vc:1,va:1,po:441,ir:2.9,om:9.1,ck:"Günde 7-8 adet.",r:"great",av:0},
+{id:39,n:"Badem",c:"Kuruyemiş",ch:0,ca:579,fi:12.5,pr:21,fa:50,vc:0,va:0,po:733,ir:3.7,om:0,ck:"Çiğ, tuzsuz tercih.",r:"great",av:0},
+{id:40,n:"Fındık",c:"Kuruyemiş",ch:0,ca:628,fi:9.7,pr:15,fa:61,vc:6,va:1,po:680,ir:4.7,om:0.1,ck:"E vitamini kaynağı.",r:"great",av:0},
+{id:41,n:"Keten Tohumu",c:"Tohum",ch:0,ca:534,fi:27,pr:18,fa:42,vc:1,va:0,po:813,ir:5.7,om:22.8,ck:"Öğütüp yoğurda ekleyin.",r:"great",av:0},
+{id:42,n:"Chia Tohumu",c:"Tohum",ch:0,ca:486,fi:34,pr:17,fa:31,vc:2,va:0,po:407,ir:7.7,om:17.5,ck:"15dk suda bekletin.",r:"great",av:0},
+{id:43,n:"Yoğurt",c:"Süt Ürünü",ch:6,ca:63,fi:0,pr:5.3,fa:1.6,vc:1,va:6,po:234,ir:0.1,om:0,ck:"Doğal, şekersiz.",r:"good",av:0},
+{id:44,n:"Kefir",c:"Süt Ürünü",ch:5,ca:41,fi:0,pr:3.3,fa:1,vc:0,va:4,po:164,ir:0,om:0,ck:"Günde 1 bardak.",r:"great",av:0},
+{id:45,n:"Lor Peyniri",c:"Süt Ürünü",ch:10,ca:98,fi:0,pr:11,fa:4.5,vc:0,va:3,po:84,ir:0.1,om:0,ck:"Kahvaltıda ideal.",r:"good",av:0},
+{id:46,n:"Süt",c:"Süt Ürünü",ch:8,ca:50,fi:0,pr:3.3,fa:2,vc:0,va:5,po:150,ir:0,om:0,ck:"Günde 1-2 bardak.",r:"good",av:0},
+{id:47,n:"Zeytinyağı",c:"Yağ",ch:0,ca:884,fi:0,pr:0,fa:100,vc:0,va:0,po:1,ir:0.6,om:0.8,ck:"Soğuk sıkım, salatalara.",r:"great",av:0},
+{id:48,n:"Avokado Yağı",c:"Yağ",ch:0,ca:884,fi:0,pr:0,fa:100,vc:0,va:0,po:0,ir:0,om:1,ck:"Yüksek ısıya uygun.",r:"good",av:0},
+{id:49,n:"Yeşil Çay",c:"İçecek",ch:0,ca:1,fi:0,pr:0,fa:0,vc:0,va:0,po:8,ir:0,om:0,ck:"Günde 2-3 fincan.",r:"great",av:0},
+{id:50,n:"Hibiskus Çayı",c:"İçecek",ch:0,ca:0,fi:0,pr:0,fa:0,vc:7,va:0,po:20,ir:0,om:0,ck:"Kolesterolü düşürür.",r:"great",av:0},
+{id:79,n:"Zerdeçal",c:"Baharat",ch:0,ca:354,fi:21,pr:8,fa:10,vc:26,va:0,po:2525,ir:41.4,om:0,ck:"Karabiber ile emilimi artar.",r:"great",av:0},
+{id:80,n:"Zencefil",c:"Baharat",ch:0,ca:80,fi:2,pr:1.8,fa:0.8,vc:5,va:0,po:415,ir:0.6,om:0,ck:"Çay veya yemeklere.",r:"great",av:0},
+{id:81,n:"Yumurta Beyazı",c:"Yumurta",ch:0,ca:52,fi:0,pr:11,fa:0.2,vc:0,va:0,po:163,ir:0.1,om:0,ck:"Saf protein.",r:"good",av:0},
+{id:82,n:"Barbunya",c:"Baklagil",ch:0,ca:127,fi:6.4,pr:8.7,fa:0.5,vc:0,va:0,po:403,ir:2.9,om:0,ck:"Zeytinyağlı pilaki.",r:"great",av:0},
+{id:83,n:"Börülce",c:"Baklagil",ch:0,ca:116,fi:6.5,pr:8,fa:0.5,vc:0,va:0,po:278,ir:2.5,om:0,ck:"Zeytinyağlı veya salata.",r:"great",av:0},
+{id:84,n:"Soya Fasulyesi",c:"Baklagil",ch:0,ca:173,fi:6,pr:17,fa:9,vc:6,va:0,po:515,ir:5.1,om:0.6,ck:"Tofu veya soya sütü.",r:"great",av:0},
+{id:51,n:"Sucuk",c:"İşlenmiş Et",ch:90,ca:452,fi:0,pr:18,fa:41,vc:0,va:0,po:180,ir:1.5,om:0,ck:"",r:"bad",av:1},
+{id:52,n:"Salam",c:"İşlenmiş Et",ch:70,ca:300,fi:0,pr:12,fa:27,vc:0,va:0,po:170,ir:1,om:0,ck:"",r:"bad",av:1},
+{id:53,n:"Sosis",c:"İşlenmiş Et",ch:65,ca:290,fi:0,pr:11,fa:26,vc:0,va:0,po:160,ir:1.2,om:0,ck:"",r:"bad",av:1},
+{id:54,n:"Pastırma",c:"İşlenmiş Et",ch:68,ca:240,fi:0,pr:33,fa:12,vc:0,va:0,po:200,ir:2.5,om:0,ck:"",r:"bad",av:1},
+{id:55,n:"Kavurma",c:"Kırmızı Et",ch:110,ca:350,fi:0,pr:25,fa:27,vc:0,va:0,po:230,ir:2.8,om:0,ck:"",r:"bad",av:1},
+{id:56,n:"Kuzu Pirzola",c:"Kırmızı Et",ch:95,ca:294,fi:0,pr:25,fa:21,vc:0,va:0,po:310,ir:1.9,om:0.4,ck:"",r:"bad",av:1},
+{id:57,n:"Dana Bonfile",c:"Kırmızı Et",ch:82,ca:271,fi:0,pr:26,fa:18,vc:0,va:0,po:318,ir:2.6,om:0,ck:"",r:"caution",av:1},
+{id:58,n:"Karaciğer",c:"Sakatat",ch:330,ca:135,fi:0,pr:21,fa:4,vc:1,va:6500,po:313,ir:6.5,om:0,ck:"",r:"bad",av:1},
+{id:59,n:"Böbrek",c:"Sakatat",ch:411,ca:100,fi:0,pr:17,fa:3,vc:10,va:0,po:262,ir:4.6,om:0,ck:"",r:"bad",av:1},
+{id:60,n:"Beyin",c:"Sakatat",ch:2500,ca:125,fi:0,pr:11,fa:9,vc:11,va:0,po:274,ir:1.6,om:0.9,ck:"",r:"bad",av:1},
+{id:61,n:"İşkembe",c:"Sakatat",ch:150,ca:85,fi:0,pr:12,fa:4,vc:0,va:0,po:150,ir:1,om:0,ck:"",r:"bad",av:1},
+{id:62,n:"Tereyağı",c:"Yağ",ch:215,ca:717,fi:0,pr:0.9,fa:81,vc:0,va:49,po:24,ir:0,om:0.3,ck:"",r:"bad",av:1},
+{id:63,n:"Margarin",c:"Yağ",ch:0,ca:717,fi:0,pr:0,fa:80,vc:0,va:0,po:0,ir:0,om:0,ck:"",r:"bad",av:1},
+{id:64,n:"Kaşar Peyniri",c:"Süt Ürünü",ch:71,ca:350,fi:0,pr:25,fa:28,vc:0,va:20,po:98,ir:0.4,om:0,ck:"",r:"caution",av:1},
+{id:65,n:"Tulum Peyniri",c:"Süt Ürünü",ch:80,ca:370,fi:0,pr:20,fa:32,vc:0,va:18,po:80,ir:0.3,om:0,ck:"",r:"caution",av:1},
+{id:66,n:"Krema",c:"Süt Ürünü",ch:137,ca:340,fi:0,pr:2,fa:37,vc:1,va:40,po:75,ir:0,om:0,ck:"",r:"bad",av:1},
+{id:67,n:"Dondurma",c:"Tatlı",ch:44,ca:207,fi:0,pr:3.5,fa:11,vc:1,va:15,po:199,ir:0.1,om:0,ck:"",r:"bad",av:1},
+{id:68,n:"Pasta / Kek",c:"Tatlı",ch:75,ca:380,fi:0.5,pr:5,fa:18,vc:0,va:5,po:90,ir:1.5,om:0,ck:"",r:"bad",av:1},
+{id:69,n:"Baklava",c:"Tatlı",ch:20,ca:428,fi:1,pr:6,fa:23,vc:0,va:2,po:100,ir:1,om:0,ck:"",r:"bad",av:1},
+{id:70,n:"Börek",c:"Hamur İşi",ch:50,ca:310,fi:1,pr:8,fa:16,vc:0,va:4,po:100,ir:1.2,om:0,ck:"",r:"bad",av:1},
+{id:71,n:"Kızartma",c:"Fast Food",ch:0,ca:312,fi:2.9,pr:3.4,fa:15,vc:5,va:0,po:579,ir:0.8,om:0,ck:"",r:"bad",av:1},
+{id:72,n:"Hamburger",c:"Fast Food",ch:82,ca:540,fi:1,pr:25,fa:30,vc:1,va:2,po:250,ir:3,om:0,ck:"",r:"bad",av:1},
+{id:73,n:"Pizza",c:"Fast Food",ch:44,ca:266,fi:2,pr:11,fa:10,vc:2,va:8,po:172,ir:1.7,om:0,ck:"",r:"bad",av:1},
+{id:74,n:"Karides",c:"Deniz Ürünü",ch:189,ca:99,fi:0,pr:24,fa:0.3,vc:0,va:5,po:185,ir:0.5,om:0.5,ck:"",r:"caution",av:1},
+{id:75,n:"Yumurta Sarısı",c:"Yumurta",ch:1085,ca:322,fi:0,pr:16,fa:27,vc:0,va:42,po:109,ir:2.7,om:0.1,ck:"",r:"caution",av:1},
+{id:76,n:"Beyaz Ekmek",c:"Tahıl",ch:0,ca:265,fi:2.7,pr:9,fa:3.2,vc:0,va:0,po:115,ir:3.6,om:0,ck:"",r:"caution",av:1},
+{id:77,n:"Gazlı İçecek",c:"İçecek",ch:0,ca:41,fi:0,pr:0,fa:0,vc:0,va:0,po:2,ir:0,om:0,ck:"",r:"bad",av:1},
+{id:78,n:"Alkol",c:"İçecek",ch:0,ca:231,fi:0,pr:0,fa:0,vc:0,va:0,po:0,ir:0,om:0,ck:"",r:"bad",av:1}
+];
+
+var ML={b:[
+{t:"Yulaf Ezmesi Kâsesi",d:"Yulaf + yaban mersini + ceviz + bal",cal:320,tm:10},
+{t:"Avokadolu Tost",d:"Tam buğday + avokado + domates + keten tohumu",cal:290,tm:8},
+{t:"Lor Peynirli Tabak",d:"Lor + salatalık + domates + zeytinyağı",cal:250,tm:5},
+{t:"Yumurta Beyazı Omlet",d:"3 yumurta beyazı + ıspanak + biber",cal:180,tm:10},
+{t:"Chia Pudingi",d:"Chia + badem sütü + muz + fındık",cal:280,tm:5},
+{t:"Kefir Smoothie",d:"Kefir + çilek + muz + keten tohumu",cal:220,tm:5},
+{t:"Yoğurtlu Granola",d:"Yoğurt + yulaf + kuru üzüm + badem",cal:310,tm:3}
+],l:[
+{t:"Izgara Somon & Kinoa",d:"Somon + kinoa + brokoli + limon",cal:480,tm:25},
+{t:"Mercimek Çorbası",d:"Kırmızı mercimek + mevsim salata",cal:350,tm:30},
+{t:"Nohut Salatası",d:"Nohut + domates + salatalık + zeytinyağı",cal:320,tm:15},
+{t:"Tavuk Wrap",d:"Tam buğday lavaş + tavuk + roka + yoğurt",cal:380,tm:20},
+{t:"Zeytinyağlı Enginar",d:"Enginar + havuç + bezelye + limon",cal:220,tm:40},
+{t:"Izgara Levrek",d:"Levrek + roka + nar + ceviz salatası",cal:350,tm:25},
+{t:"Barbunya Pilaki",d:"Barbunya + soğan + domates + zeytinyağı",cal:340,tm:45},
+{t:"Bulgur Pilavı",d:"Bulgur + cacık + mevsim salata",cal:380,tm:25}
+],d:[
+{t:"Fırında Alabalık",d:"Alabalık + patates + limon + biberiye",cal:380,tm:35},
+{t:"Sebze Güveci",d:"Kabak + patlıcan + biber + domates + nohut",cal:280,tm:40},
+{t:"Ispanaklı Mercimek",d:"Mercimek + ıspanak + soğan + limon",cal:260,tm:25},
+{t:"Hindi & Sebze",d:"Hindi göğsü + brokoli + havuç + karnabahar",cal:320,tm:25},
+{t:"Ton Balıklı Salata",d:"Ton balığı + marul + domates + zeytinyağı",cal:290,tm:10},
+{t:"Kabak Dolma",d:"Kabak + bulgur + soğan + nane",cal:250,tm:50},
+{t:"Kuru Fasulye",d:"Fasulye + domates sosu + bulgur pilav",cal:380,tm:55},
+{t:"Karnabahar & Somon",d:"Karnabahar püresi + fırında somon",cal:370,tm:30}
+]};
+
+var GC=["Tümü","Sebze","Meyve","Tahıl","Baklagil","Balık","Beyaz Et","Kuruyemiş","Tohum","Süt Ürünü","Yağ","İçecek","Baharat","Yumurta"];
+var BC=["Tümü","İşlenmiş Et","Kırmızı Et","Sakatat","Yağ","Süt Ürünü","Tatlı","Hamur İşi","Fast Food","Deniz Ürünü","Yumurta","Tahıl","İçecek"];
+
+function rl(r){return r==="great"?"Harika":r==="good"?"İyi":r==="caution"?"Dikkat":"Kaçının"}
+function rc(r){return r==="great"?"#16a34a":r==="good"?"#2563eb":r==="caution"?"#d97706":"#dc2626"}
+function rb(r){return r==="great"?"#f0fdf4":r==="good"?"#eff6ff":r==="caution"?"#fffbeb":"#fef2f2"}
+function pk(a){return a[Math.floor(Math.random()*a.length)]}
+
+var st={pg:"home",fc:"Tümü",ac:"Tümü",ns:"ch",nd:"asc"};
+
+function render(){
+  var a=D.getElementById("app");
+  a.innerHTML=
+  '<div id="pg-home" class="page'+(st.pg==="home"?" active":"")+'">'+homeHTML()+'</div>'+
+  '<div id="pg-foods" class="page'+(st.pg==="foods"?" active":"")+'">'+foodsPageHTML()+'</div>'+
+  '<div id="pg-avoid" class="page'+(st.pg==="avoid"?" active":"")+'">'+avoidPageHTML()+'</div>'+
+  '<div id="pg-meal" class="page'+(st.pg==="meal"?" active":"")+'">'+mealPageHTML()+'</div>'+
+  '<div id="pg-nutrition" class="page'+(st.pg==="nutrition"?" active":"")+'">'+nutrPageHTML()+'</div>'+
+  '<div class="mo" id="modal"><div class="moo" id="modal-overlay"></div><div class="mos" id="modal-body"></div></div>'+
+  navHTML();
+  bind();
+}
+
+function navHTML(){
+  var items=[{i:"🏠",l:"Ana Sayfa",p:"home"},{i:"🥗",l:"Beslenme",p:"foods"},{i:"🚫",l:"Kaçının",p:"avoid"},{i:"🍽️",l:"Menü",p:"meal"},{i:"📊",l:"Besin",p:"nutrition"}];
+  return '<div class="nav">'+items.map(function(x){return '<button class="nb'+(st.pg===x.p?' on':'')+'" data-go="'+x.p+'"><i>'+x.i+'</i><span>'+x.l+'</span></button>'}).join('')+'</div>';
+}
+
+function homeHTML(){
+  return '<div class="hh"><div class="he">🫀</div><h1 class="ht">Kolesterol<br>Rehberi</h1><p class="hs">Sağlıklı beslenme için akıllı rehberiniz</p></div>'+
+  '<div class="hg">'+
+  '<button class="hc" data-go="foods" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7)"><div class="hci">🥗</div><div class="hctt" style="color:#16a34a">Beslenme Listesi</div><div class="hcd">55+ sağlıklı gıda</div></button>'+
+  '<button class="hc" data-go="avoid" style="background:linear-gradient(135deg,#fef2f2,#fecaca)"><div class="hci">🚫</div><div class="hctt" style="color:#dc2626">Kaçınılacaklar</div><div class="hcd">Dikkat edilecek gıdalar</div></button>'+
+  '<button class="hc" data-go="meal" style="background:linear-gradient(135deg,#f5f3ff,#ede9fe)"><div class="hci">🍽️</div><div class="hctt" style="color:#7c3aed">Menü Oluştur</div><div class="hcd">Hızlı günlük menü</div></button>'+
+  '<button class="hc" data-go="nutrition" style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe)"><div class="hci">📊</div><div class="hctt" style="color:#0284c7">Besin Değerleri</div><div class="hcd">Vitamin & mineral tablosu</div></button>'+
+  '</div>'+
+  '<div class="tb"><div class="tbl">💡 GÜNÜN BİLGİSİ</div><div class="tbt">Günde 5-10g çözünür lif tüketmek LDL kolesterolü %5-10 düşürebilir. Yulaf, mercimek ve elma en iyi kaynaklardır.</div></div>'+
+  '<div class="tl"><div class="tlh">⚡ Hızlı İpuçları</div>'+
+  ["Kızartma yerine ızgara veya fırın tercih edin","Tereyağı yerine zeytinyağı kullanın","Haftada 2-3 kez balık tüketin","Günde 1 avuç ceviz veya badem atıştırın","İşlenmiş et ürünlerinden uzak durun"].map(function(t){return '<div class="tr"><span class="tc">✓</span><span>'+t+'</span></div>'}).join('')+
+  '</div>';
+}
+
+function cardHTML(f){
+  return '<button class="fc" data-fid="'+f.id+'"><div class="fcc" style="background:'+rb(f.r)+';color:'+rc(f.r)+'">'+f.ch+'<small>mg</small></div><div class="fci"><div class="fcn">'+f.n+'</div><div class="fcm">'+f.c+' · '+f.ca+' kcal</div></div><div class="fcb" style="background:'+rb(f.r)+';color:'+rc(f.r)+'">'+rl(f.r)+'</div></button>';
+}
+
+function pillsHTML(cats,active,dataKey){
+  return '<div class="pills">'+cats.map(function(c){return '<button class="pill'+(c===active?' on':'')+'" data-'+dataKey+'="'+c+'">'+c+'</button>'}).join('')+'</div>';
+}
+
+function searchHTML(id){
+  return '<div class="sw"><div class="sb"><span style="color:#94a3b8">🔍</span><input id="'+id+'" placeholder="Gıda ara..."><button class="cb" id="'+id+'-cl">✕</button></div></div>';
+}
+
+function getList(isAvoid,cat,q){
+  var list=FOODS.filter(function(f){return isAvoid?f.av:!f.av});
+  if(cat!=="Tümü") list=list.filter(function(f){return f.c===cat});
+  if(q) list=list.filter(function(f){return f.n.toLowerCase().indexOf(q.toLowerCase())!==-1});
+  return list;
+}
+
+function foodsPageHTML(){
+  var q="",list=getList(false,st.fc,q);
+  return '<div class="ph"><button class="bb" data-go="home">←</button><div class="pt">🥗 Beslenme Listesi</div></div>'+
+    searchHTML("fs")+pillsHTML(GC,st.fc,"fcat")+
+    '<div class="fl" id="flist">'+
+    (list.length?list.map(cardHTML).join(''):'<div class="nr">Sonuç bulunamadı</div>')+
+    '</div>';
+}
+
+function avoidPageHTML(){
+  var list=getList(true,st.ac,"");
+  return '<div class="ph"><button class="bb" data-go="home">←</button><div class="pt">🚫 Kaçınılması Gerekenler</div></div>'+
+    '<div class="wbn">⚠️ Bu gıdalar yüksek kolesterol, doymuş yağ veya trans yağ içerir. Tüketimini minimumda tutun.</div>'+
+    searchHTML("as")+pillsHTML(BC,st.ac,"acat")+
+    '<div class="fl" id="alist">'+
+    (list.length?list.map(cardHTML).join(''):'<div class="nr">Sonuç bulunamadı</div>')+
+    '</div>';
+}
+
+function mealPageHTML(){
+  return '<div class="ph"><button class="bb" data-go="home">←</button><div class="pt">🍽️ Menü Oluşturucu</div></div>'+
+    '<div style="padding:0 20px"><button class="gb" id="gen-btn">🎲 Günlük Menü Oluştur</button>'+
+    '<div id="meal-out"><div class="em"><div class="emi">🍽️</div><div style="font-size:14px">Kolesterol dostu bir günlük menü oluşturmak için butona tıklayın</div></div></div></div>';
+}
+
+function genMealHTML(){
+  var b=pk(ML.b),l=pk(ML.l),d=pk(ML.d),tc=b.cal+l.cal+d.cal;
+  var items=[{m:b,i:"☀️",l:"KAHVALTI",br:"#fde047"},{m:l,i:"🌤️",l:"ÖĞLE",br:"#93c5fd"},{m:d,i:"🌙",l:"AKŞAM",br:"#c4b5fd"}];
+  return '<div class="mt"><span style="font-size:13px;font-weight:600;color:#64748b">Toplam Kalori</span><span style="font-size:18px;font-weight:800">~'+tc+' <span style="font-size:12px;font-weight:500">kcal</span></span></div>'+
+    items.map(function(x){return '<div class="mcd" style="border:1.5px solid '+x.br+'"><div class="mch"><span class="mct">'+x.i+' '+x.l+'</span><span class="mcti">⏱ '+x.m.tm+'dk</span></div><div class="mctt">'+x.m.t+'</div><div class="mcde">'+x.m.d+'</div><div class="mccal" style="background:'+x.br+'33">~'+x.m.cal+' kcal</div></div>'}).join('')+
+    '<button class="rb" id="regen-btn">🔄 Yeniden Oluştur</button>';
+}
+
+function nutrPageHTML(){
+  var list=FOODS.slice();
+  list.sort(function(a,b){return st.nd==="asc"?a[st.ns]-b[st.ns]:b[st.ns]-a[st.ns]});
+  var cols=[{k:"ch",l:"Kol."},{k:"ca",l:"Kal."},{k:"pr",l:"Prot."},{k:"fi",l:"Lif"},{k:"om",l:"Ω-3"},{k:"ir",l:"Demir"}];
+  var ar=function(k){return st.ns===k?(st.nd==="asc"?" ↑":" ↓"):""};
+  return '<div class="ph"><button class="bb" data-go="home">←</button><div class="pt">📊 Besin Değerleri</div></div>'+
+    searchHTML("ns")+
+    '<div class="tw"><table id="ntbl"><thead><tr><th>Gıda</th>'+
+    cols.map(function(c){return '<th class="'+(st.ns===c.k?"sa":"")+'" data-nsort="'+c.k+'">'+c.l+ar(c.k)+'</th>'}).join('')+
+    '</tr></thead><tbody>'+
+    list.map(function(f){return '<tr data-fid="'+f.id+'"><td><span class="dt" style="background:'+rc(f.r)+'"></span>'+f.n+'</td>'+
+      cols.map(function(c){return '<td class="'+(c.k==="ch"&&f.ch>100?"ch":"")+(c.k===st.ns?" sa":"")+'">'+f[c.k]+'</td>'}).join('')+'</tr>'}).join('')+
+    '</tbody></table></div>';
+}
+
+function openModal(id){
+  var f=FOODS.find(function(x){return x.id===id});
+  if(!f)return;
+  var ns=[{l:"Kalori",v:f.ca,u:"kcal",i:"🔥"},{l:"Kolesterol",v:f.ch,u:"mg",i:"🫀"},{l:"Protein",v:f.pr,u:"g",i:"💪"},{l:"Yağ",v:f.fa,u:"g",i:"🫒"},{l:"Lif",v:f.fi,u:"g",i:"🌾"},{l:"Omega-3",v:f.om,u:"g",i:"🐟"},{l:"C Vit.",v:f.vc,u:"mg",i:"🍊"},{l:"A Vit.",v:f.va,u:"μg",i:"🥕"},{l:"Potasyum",v:f.po,u:"mg",i:"⚡"},{l:"Demir",v:f.ir,u:"mg",i:"🔴"}].filter(function(n){return n.v>0});
+  var h='<div class="moh"></div><div class="mohe"><div><div class="mon">'+f.n+'</div><div class="moca">'+f.c+'</div></div><div class="fcb" style="background:'+rb(f.r)+';color:'+rc(f.r)+';padding:5px 14px;font-size:12px;font-weight:700">'+rl(f.r)+'</div></div>'+
+    '<div class="ng">'+ns.map(function(n){return '<div class="ni"><span class="nii">'+n.i+'</span><div><div class="niv">'+n.v+' <span class="niu">'+n.u+'</span></div><div class="nil">'+n.l+'</div></div></div>'}).join('')+'</div>';
+  if(f.ck) h+='<div class="ckb"><div class="ckt">🍳 PİŞİRME ÖNERİSİ</div><div style="font-size:13.5px;line-height:1.5">'+f.ck+'</div></div>';
+  if(f.av) h+='<div class="wb"><div class="wt">⚠️ UYARI</div><div style="font-size:13.5px;line-height:1.5">Bu gıda yüksek kolesterol veya sağlıksız yağ içerir.</div></div>';
+  h+='<button class="mcl" id="modal-close">Kapat</button>';
+  D.getElementById("modal-body").innerHTML=h;
+  D.getElementById("modal").classList.add("open");
+  D.body.style.overflow="hidden";
+  D.getElementById("modal-close").addEventListener("click",closeModal);
+}
+
+function closeModal(){
+  D.getElementById("modal").classList.remove("open");
+  D.body.style.overflow="";
+}
+
+function updateList(listId,searchId,isAvoid,cat){
+  var q=D.getElementById(searchId).value;
+  var cl=D.getElementById(searchId+"-cl");
+  if(cl) cl.classList.toggle("v",q.length>0);
+  var list=getList(isAvoid,cat,q);
+  D.getElementById(listId).innerHTML=list.length?list.map(cardHTML).join(''):'<div class="nr">Sonuç bulunamadı</div>';
+}
+
+function updateNutr(){
+  var q=D.getElementById("ns").value;
+  var cl=D.getElementById("ns-cl");
+  if(cl) cl.classList.toggle("v",q.length>0);
+  var list=FOODS.slice();
+  if(q) list=list.filter(function(f){return f.n.toLowerCase().indexOf(q.toLowerCase())!==-1});
+  list.sort(function(a,b){return st.nd==="asc"?a[st.ns]-b[st.ns]:b[st.ns]-a[st.ns]});
+  var cols=[{k:"ch",l:"Kol."},{k:"ca",l:"Kal."},{k:"pr",l:"Prot."},{k:"fi",l:"Lif"},{k:"om",l:"Ω-3"},{k:"ir",l:"Demir"}];
+  var ar=function(k){return st.ns===k?(st.nd==="asc"?" ↑":" ↓"):""};
+  var t=D.getElementById("ntbl");
+  t.innerHTML='<thead><tr><th>Gıda</th>'+cols.map(function(c){return '<th class="'+(st.ns===c.k?"sa":"")+'" data-nsort="'+c.k+'">'+c.l+ar(c.k)+'</th>'}).join('')+'</tr></thead><tbody>'+
+    list.map(function(f){return '<tr data-fid="'+f.id+'"><td><span class="dt" style="background:'+rc(f.r)+'"></span>'+f.n+'</td>'+cols.map(function(c){return '<td class="'+(c.k==="ch"&&f.ch>100?"ch":"")+(c.k===st.ns?" sa":"")+'">'+f[c.k]+'</td>'}).join('')+'</tr>'}).join('')+'</tbody>';
+}
+
+function bind(){
+  D.getElementById("app").addEventListener("click",function(e){
+    var t=e.target.closest("[data-go]");
+    if(t){st.pg=t.dataset.go;st.fc="Tümü";st.ac="Tümü";render();window.scrollTo(0,0);return;}
+
+    var fc=e.target.closest("[data-fid]");
+    if(fc){openModal(parseInt(fc.dataset.fid));return;}
+
+    var fp=e.target.closest("[data-fcat]");
+    if(fp){st.fc=fp.dataset.fcat;Q(".pills button",D.getElementById("pg-foods")).forEach(function(b){b.classList.toggle("on",b.dataset.fcat===st.fc)});updateList("flist","fs",false,st.fc);return;}
+
+    var ap=e.target.closest("[data-acat]");
+    if(ap){st.ac=ap.dataset.acat;Q(".pills button",D.getElementById("pg-avoid")).forEach(function(b){b.classList.toggle("on",b.dataset.acat===st.ac)});updateList("alist","as",true,st.ac);return;}
+
+    if(e.target.id==="gen-btn"||e.target.id==="regen-btn"){D.getElementById("meal-out").innerHTML=genMealHTML();return;}
+
+    var ns=e.target.closest("[data-nsort]");
+    if(ns){var k=ns.dataset.nsort;if(st.ns===k)st.nd=st.nd==="asc"?"desc":"asc";else{st.ns=k;st.nd="desc";}updateNutr();return;}
+
+    if(e.target.id==="modal-overlay"){closeModal();return;}
+
+    var clr=e.target.closest(".cb");
+    if(clr){var inp=clr.previousElementSibling;if(inp){inp.value="";clr.classList.remove("v");inp.dispatchEvent(new Event("input"));}return;}
+  });
+
+  var fs=D.getElementById("fs");
+  if(fs) fs.addEventListener("input",function(){updateList("flist","fs",false,st.fc)});
+  var as=D.getElementById("as");
+  if(as) as.addEventListener("input",function(){updateList("alist","as",true,st.ac)});
+  var nss=D.getElementById("ns");
+  if(nss) nss.addEventListener("input",function(){updateNutr()});
+}
+
+render();
+</script>
+</body>
+</html>
